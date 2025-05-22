@@ -13,8 +13,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
- // 1대 1로 매칭 될 예정!
-  final List<Widget> _screens = const [
+  // 1대 1로 매칭 될 예정!
+  final List<Widget> _screens = [
     HomeScreen(),
     PlantListScreen(),
     AiDiagnosisScreen(),
@@ -32,9 +32,9 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _screens[_selectedIndex],
-        bottomNavigationBar:
-        Theme(data: Theme.of(context).copyWith(
+      body: _screens[_selectedIndex],
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
           splashFactory: NoSplash.splashFactory, // 클릭 시 물결 애니메이션 제거
           highlightColor: Colors.transparent, // 하이라이트 제거
           splashColor: Colors.transparent, // 스플래시 컬러 제거
@@ -50,11 +50,13 @@ class _MainScreenState extends State<MainScreen> {
             BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
             BottomNavigationBarItem(icon: Icon(Icons.list), label: '식물'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.auto_awesome), label: 'AI'),
+              icon: Icon(Icons.auto_awesome),
+              label: 'AI',
+            ),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: '내 정보'),
           ],
         ),
-      )
+      ),
     );
   }
 }

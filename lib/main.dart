@@ -16,9 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '로그인 앱',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
+      theme: ThemeData(primarySwatch: Colors.green),
       home: const LoginScreen(), // 첫 화면으로 로그인 화면 지정
       debugShowCheckedModeBanner: false,
     );
