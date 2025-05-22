@@ -31,17 +31,15 @@ dependencies:
   table_calendar: ^3.0.9
   flutter:
     sdk: flutter
-<<<<<<< HEAD
-  image_picker: ^1.0.4   # (버전은 최신으로!)
-=======
   image_picker: ^1.0.0
->>>>>>> e1dee8f64cb388f28d1ed72bb42a96c2c28fa03b
 
 
   http: ^1.4.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  tflite_flutter: ^0.11.0     # ← 원래대로 유지
+  image: ^4.5.4
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +66,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/model.tflite
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

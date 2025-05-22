@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../models/plant_model.dart';
-import '../models/diary_entry.dart';
+// import '../models/diary_entry.dart';
 
 class PlantDetailScreen extends StatefulWidget {
   final Plant plant;
@@ -22,12 +22,13 @@ class _PlantDetailScreenState extends State<PlantDetailScreen> {
 
     //물 주기 관련 계산
     final now = DateTime.now();
-    final nextWaterDay = plant.lastWatered.add(Duration(days: plant.waterCycleDays));
+    final nextWaterDay = plant.lastWatered.add(
+      Duration(days: plant.waterCycleDays),
+    );
     final remainingDays = nextWaterDay.difference(now).inDays;
 
-    final waterStatusText = remainingDays <= 0
-        ? "💧 오늘 물 주기!"
-        : "물 주기까지 D-$remainingDays";
+    final waterStatusText =
+        remainingDays <= 0 ? "💧 오늘 물 주기!" : "물 주기까지 D-$remainingDays";
 
     return Scaffold(
       backgroundColor: const Color(0xFFFCF8E8),
@@ -42,24 +43,36 @@ class _PlantDetailScreenState extends State<PlantDetailScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: plant.image.isNotEmpty
-                  ? Image.asset(
-                plant.image,
-                height: 180,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, StackTrace) => const Icon(Icons.broken_image, size : 80),
-              )
-              : const Icon(Icons.image_not_supported, size : 80),
+              child:
+                  plant.image.isNotEmpty
+                      ? Image.asset(
+                        plant.image,
+                        height: 180,
+                        fit: BoxFit.cover,
+                        errorBuilder:
+                            (context, error, stackTrace) =>
+                                const Icon(Icons.broken_image, size: 80),
+                      )
+                      : const Icon(Icons.image_not_supported, size: 80),
             ),
 
             const SizedBox(height: 16),
-            Text("이름 : ${plant.name}", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text(
+              "이름 : ${plant.name}",
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             Text(plant.type, style: const TextStyle(color: Colors.grey)),
-            Text("심은 날짜 ${plant.date}", style: const TextStyle(color: Colors.grey)),
+            Text(
+              "심은 날짜 ${plant.date}",
+              style: const TextStyle(color: Colors.grey),
+            ),
             const SizedBox(height: 12),
 
             //모델 기반으로 동적으로 표시
-            Text(waterStatusText, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(
+              waterStatusText,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             Text("권장 주기: ${plant.waterCycleDays}일"),
             Text("마지막으로 물 준 날짜: ${plant.lastWatered.toString().split(' ')[0]}"),
 
@@ -75,7 +88,9 @@ class _PlantDetailScreenState extends State<PlantDetailScreen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFFD8E4BC),
                   foregroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
             ),
@@ -94,21 +109,35 @@ class _PlantDetailScreenState extends State<PlantDetailScreen> {
                 });
               },
               calendarStyle: const CalendarStyle(
-                todayDecoration: BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
-                selectedDecoration: BoxDecoration(color: Colors.orange, shape: BoxShape.circle),
+                todayDecoration: BoxDecoration(
+                  color: Colors.blue,
+                  shape: BoxShape.circle,
+                ),
+                selectedDecoration: BoxDecoration(
+                  color: Colors.orange,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
 
             const SizedBox(height: 12),
-            const Text("📓 일기장", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const Text(
+              "📓 일기장",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
 
             // diaryList에서 불러오기
-            ...plant.diaryList.map((entry) => ListTile(
-              leading: const Icon(Icons.calendar_today, size: 18),
-              title: Text(entry.date),
-              trailing: Text(entry.memo, style: const TextStyle(fontSize: 20)),
-            )),
+            ...plant.diaryList.map(
+              (entry) => ListTile(
+                leading: const Icon(Icons.calendar_today, size: 18),
+                title: Text(entry.date),
+                trailing: Text(
+                  entry.memo,
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
           ],
         ),
       ),
