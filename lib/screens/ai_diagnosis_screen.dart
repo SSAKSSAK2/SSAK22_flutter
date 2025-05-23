@@ -171,7 +171,7 @@ class _AiDiagnosisScreenState extends State<AiDiagnosisScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/mascot_ai.png', height: 120),
+            Image.asset('assets/images/mascot_ai.png', height: 120),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _modelReady ? _pickImage : null,
