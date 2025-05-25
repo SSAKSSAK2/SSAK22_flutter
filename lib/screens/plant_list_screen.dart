@@ -21,6 +21,7 @@ class _PlantListScreenState extends State<PlantListScreen> {
       urgent: false,
       lastWatered: DateTime(2025, 5, 21),
       waterCycleDays: 6,
+      diaryList: [], //필수 추가!
     ),
   ];
 
