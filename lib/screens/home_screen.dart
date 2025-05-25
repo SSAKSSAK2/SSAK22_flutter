@@ -5,6 +5,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: const Color(0xFFFCF8E8),
       body: SafeArea(
@@ -12,7 +14,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             // 상단 아이콘들
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -20,7 +22,10 @@ class HomeScreen extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.calendar_month),
                     onPressed: () {
-                      // TODO: 캘린더 페이지로 이동
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const CalendarPage()),
+                      );
                     },
                   ),
                   // 상점 아이콘 + 포인트
@@ -29,7 +34,10 @@ class HomeScreen extends StatelessWidget {
                       IconButton(
                         icon: const Icon(Icons.local_grocery_store),
                         onPressed: () {
-                          // TODO: 상점 페이지로 이동
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const StorePage()),
+                          );
                         },
                       ),
                       const SizedBox(width: 4),
@@ -53,50 +61,72 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // 캐릭터 이미지
+            // 캐릭터 배경 포함 이미지 + 말풍선 텍스트
             Expanded(
-              child: Center(
-                child: Image.asset(
-                  'assets/images/character_hi.png', // ← 실제 이미지 파일 경로로 교체 필요
-                  width: 180,
-                  height: 180,
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
-
-            // 말풍선 텍스트
-            Padding(
-              padding: const EdgeInsets.only(bottom: 40),
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 32),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 16,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 6,
-                      offset: Offset(0, 2),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  // 배경 이미지를 화면 높이에 맞춰 비율 유지
+                  Center(
+                    child: Image.asset(
+                      'assets/images/final_fully_filled_field.png',
+                      height: screenHeight,
+                      fit: BoxFit.fitHeight,
                     ),
-                  ],
-                ),
-                child: const Text(
-                  "오늘 물은 주셨나요?\n"
-                  "도레미파 물 줄 시간입니당ㅏ!!"
-                  "",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  textAlign: TextAlign.center,
-                ),
+                  ),
+
+                  // 캐릭터 말풍선 텍스트
+                  Positioned(
+                    bottom: 40,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 32),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 6,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: const Text(
+                        "'도레미파' 물 줄 시간이야!!",
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class CalendarPage extends StatelessWidget {
+  const CalendarPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('캘린더')),
+      body: const Center(child: Text('캘린더 페이지입니다')),
+    );
+  }
+}
+
+class StorePage extends StatelessWidget {
+  const StorePage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('상점')),
+      body: const Center(child: Text('상점 페이지입니다')),
     );
   }
 }
