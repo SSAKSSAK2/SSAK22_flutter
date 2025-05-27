@@ -16,24 +16,6 @@ add_executable(${BINARY_NAME} WIN32
   "runner.exe.manifest"
 )
 
-# DLL 이 놓여 있는 위치(루트/blobs) 지정
-set(TFLITE_DLL "${CMAKE_CURRENT_SOURCE_DIR}/../../blobs/libtensorflowlite_c-win.dll")
-
-add_custom_command(
-  TARGET ${BINARY_NAME} POST_BUILD
-
-  # ① blobs 폴더를 먼저 만듭니다
-  COMMAND ${CMAKE_COMMAND} -E make_directory
-          "$<TARGET_FILE_DIR:${BINARY_NAME}>/blobs"
-
-  # ② DLL을 그 폴더로 복사합니다
-  COMMAND ${CMAKE_COMMAND} -E copy_if_different
-          "${TFLITE_DLL}"
-          "$<TARGET_FILE_DIR:${BINARY_NAME}>/blobs/libtensorflowlite_c-win.dll"
-
-  COMMENT "Copying TensorFlow Lite runtime DLL into blobs/ folder..."
-)
-
 # Apply the standard set of build settings. This can be removed for applications
 # that need different build settings.
 apply_standard_settings(${BINARY_NAME})
