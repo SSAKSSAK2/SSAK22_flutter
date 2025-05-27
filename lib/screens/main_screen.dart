@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_project/screens/ai_diagnosis_screen.dart';
 import 'package:my_project/screens/home_screen.dart';
 import 'plant_list_screen.dart';
-import 'ai_diagnosis_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -14,7 +14,7 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   // 1대 1로 매칭 될 예정!
-  final List<Widget> _screens = const [
+  final List<Widget> _screens = [
     HomeScreen(),
     PlantListScreen(),
     AiDiagnosisScreen(),

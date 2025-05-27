@@ -43,15 +43,9 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(width: 4),
                       const Row(
                         children: [
-                          Icon(
-                            Icons.local_fire_department,
-                            color: Colors.orange,
-                          ),
+                          Icon(Icons.local_fire_department, color: Colors.orange),
                           SizedBox(width: 4),
-                          Text(
-                            "130p",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                          Text("130p", style: TextStyle(fontWeight: FontWeight.bold)),
                         ],
                       ),
                     ],
@@ -101,7 +95,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
+            )
           ],
         ),
       ),

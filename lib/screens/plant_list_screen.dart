@@ -17,12 +17,12 @@ class _PlantListScreenState extends State<PlantListScreen> {
       type: "방울 토마토",
       water: "물 주기 D-3",
       date: "2025.04.22",
-      image: "assets/images/tomato.jpg",
+      image: "assets/images/tomato.jpg", // 또는 http로 시작하는 URL도 가능
       urgent: false,
       lastWatered: DateTime(2025, 5, 21),
       waterCycleDays: 6,
+      diaryList: [], //필수 추가!
     ),
-
   ];
 
   void _navigateToAddScreen() async {
@@ -77,25 +77,7 @@ class _PlantListScreenState extends State<PlantListScreen> {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: plant.image.isEmpty
-                        ? Container(
-                      width: 80,
-                      height: 80,
-                      color: Colors.grey[300],
-                      child: const Icon(Icons.image_not_supported, size: 40, color: Colors.grey),
-                    )
-                        : Image.network(
-                      plant.image,
-                      width: 80,
-                      height: 80,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        width: 80,
-                        height: 80,
-                        color: Colors.grey[300],
-                        child: const Icon(Icons.broken_image, size: 40, color: Colors.grey),
-                      ),
-                    ),
+                    child: _buildPlantImage(plant.image),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -127,6 +109,40 @@ class _PlantListScreenState extends State<PlantListScreen> {
         backgroundColor: Colors.black,
         child: const Icon(Icons.add),
       ),
+    );
+  }
+
+  /// 이미지를 네트워크/에셋/없음에 따라 처리
+  Widget _buildPlantImage(String imagePath) {
+    if (imagePath.isEmpty) {
+      return Container(
+        width: 80,
+        height: 80,
+        color: Colors.grey[300],
+        child: const Icon(Icons.image_not_supported, size: 40, color: Colors.grey),
+      );
+    }
+
+    if (imagePath.startsWith('http')) {
+      return Image.network(
+        imagePath,
+        width: 80,
+        height: 80,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) => Container(
+          width: 80,
+          height: 80,
+          color: Colors.grey[300],
+          child: const Icon(Icons.broken_image, size: 40, color: Colors.grey),
+        ),
+      );
+    }
+
+    return Image.asset(
+      imagePath,
+      width: 80,
+      height: 80,
+      fit: BoxFit.cover,
     );
   }
 }

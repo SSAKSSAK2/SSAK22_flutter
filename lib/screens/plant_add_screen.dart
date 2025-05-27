@@ -70,8 +70,9 @@ class _PlantAddScreenState extends State<PlantAddScreen> {
                   date: DateTime.now().toString().split(' ')[0],
                   image: imageController.text,
                   urgent: urgent,
-                  lastWatered: DateTime.now(), // ✅ 현재 날짜로 설정
+                  lastWatered: DateTime.now(),
                   waterCycleDays: int.tryParse(waterCycleController.text) ?? 3,
+                  diaryList: [], //새 식물이니까 일기는 빈 리스트로 시작
                 );
 
                 Navigator.pop(context, newPlant);
