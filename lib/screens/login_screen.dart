@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_project/screens/FindId_Screen.dart';
+import 'package:my_project/screens/FindPassword_screen.dart';
 import 'package:my_project/screens/main_screen.dart';
+import 'package:my_project/screens/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -8,7 +11,7 @@ class LoginScreen extends StatelessWidget {
     final emailRegex = RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
     return emailRegex.hasMatch(email);
   }
-// 추후에 이메일 양식이 맞는지 or db에 저장된 데이터와 맞는지 확인하고 알려주는 거 필요
+  // 추후에 이메일 양식이 맞는지 or db에 저장된 데이터와 맞는지 확인하고 알려주는 거 필요
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +24,7 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 120), // ← 위쪽 공간 확보
               const SizedBox(height: 40),
               // 캐릭터 이미지
-              Image.asset(
-                'assets/images/character_hi.png',
-                height: 100,
-              ),
+              Image.asset('assets/images/character_hi.png', height: 100),
 
               const SizedBox(height: 20),
 
@@ -73,7 +73,9 @@ class LoginScreen extends StatelessWidget {
                           // TODO: 아이디/ 비번 확인 시스템 만들기
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => const MainScreen()),
+                            MaterialPageRoute(
+                              builder: (context) => const MainScreen(),
+                            ),
                           );
                         },
                         style: ElevatedButton.styleFrom(
@@ -93,21 +95,28 @@ class LoginScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          // 아이디 찾기
                           GestureDetector(
                             onTap: () {
-                              // TODO: 아이디 찾기 화면 이동
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text("아이디 찾기")),
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const FindIdScreen(),
+                                ),
                               );
                             },
                             child: const Text("아이디 찾기"),
                           ),
                           const Text("|"),
+                          // 비밀번호 찾기
                           GestureDetector(
                             onTap: () {
-                              // TODO: 비밀번호 찾기 화면 이동
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text("비밀번호 찾기")),
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => const FindPasswordScreen(),
+                                ),
                               );
                             },
                             child: const Text("비밀번호 찾기"),
@@ -115,9 +124,11 @@ class LoginScreen extends StatelessWidget {
                           const Text("|"),
                           GestureDetector(
                             onTap: () {
-                              // TODO: 회원가입 화면 이동
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text("회원가입")),
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SignUpScreen(),
+                                ),
                               );
                             },
                             child: const Text("회원가입"),
@@ -137,9 +148,9 @@ class LoginScreen extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     // TODO: 카카오 로그인 연동 처리
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("카카오 연동 로그인")),
-                    );
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(const SnackBar(content: Text("카카오 연동 로그인")));
                   },
                   child: Image.asset(
                     'assets/images/kakao_login_large_wide.png',
