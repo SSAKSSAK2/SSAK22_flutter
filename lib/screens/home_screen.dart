@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'shop_screen.dart';
 
+// 캘린더, 상점 페이지 import 또는 동일 파일 하단 클래스 참고
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -12,7 +14,7 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // 상단 아이콘들
+            // 상단 아이콘
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               child: Row(
@@ -24,11 +26,13 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const CalendarPage()),
+                        MaterialPageRoute(
+                          builder: (context) => const CalendarPage(),
+                        ),
                       );
                     },
                   ),
-                  // 상점 아이콘 + 포인트
+                  // 상점 + 포인트
                   Row(
                     children: [
                       IconButton(
@@ -36,16 +40,24 @@ class HomeScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const StorePage()),
+                            MaterialPageRoute(
+                              builder: (context) => ShopScreen(),
+                            ),
                           );
                         },
                       ),
                       const SizedBox(width: 4),
                       const Row(
                         children: [
-                          Icon(Icons.local_fire_department, color: Colors.orange),
+                          Icon(
+                            Icons.local_fire_department,
+                            color: Colors.orange,
+                          ),
                           SizedBox(width: 4),
-                          Text("130p", style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text(
+                            "130p",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ],
                       ),
                     ],
@@ -53,14 +65,12 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 16),
 
-            // 캐릭터 배경 포함 이미지 + 말풍선 텍스트
+            // 배경 이미지 + 캐릭터 말풍선
             Expanded(
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  // 배경 이미지를 화면 높이에 맞춰 비율 유지
                   Center(
                     child: Image.asset(
                       'assets/images/final_fully_filled_field.png',
@@ -68,13 +78,14 @@ class HomeScreen extends StatelessWidget {
                       fit: BoxFit.fitHeight,
                     ),
                   ),
-
-                  // 캐릭터 말풍선 텍스트
                   Positioned(
                     bottom: 40,
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 32),
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 16,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
@@ -88,14 +99,17 @@ class HomeScreen extends StatelessWidget {
                       ),
                       child: const Text(
                         "'도레미파' 물 줄 시간이야!!",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -103,6 +117,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+// 추가 페이지들
 class CalendarPage extends StatelessWidget {
   const CalendarPage({super.key});
   @override
